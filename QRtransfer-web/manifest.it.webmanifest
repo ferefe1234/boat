@@ -1,0 +1,32 @@
+{
+  "name": "QRtransfer",
+  "short_name": "QRtransfer",
+  "description": "Invia un file o un testo tra due dispositivi con soltanto uno schermo e una fotocamera. Codici QR animati con codifica fountain, nessun percorso di rete in mezzo.",
+  "theme_color": "#ffffff",
+  "background_color": "#ffffff",
+  "display": "standalone",
+  "icons": [
+    {
+      "src": "icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "icon-maskable-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ],
+  "lang": "it",
+  "dir": "ltr",
+  "start_url": "./it/",
+  "scope": "./"
+}
