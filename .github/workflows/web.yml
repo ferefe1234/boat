@@ -1,0 +1,30 @@
+name: Web compatibility build
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  web:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+          cache: npm
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install Pillow==12.3.0
+      - run: python build/prepare-assets.py
+      - run: npm ci
+      - run: npm test
+      - run: npm run build:web
+      - uses: actions/upload-artifact@v4
+        with:
+          name: QRtransfer-web
+          path: |
+            artifacts/QRtransfer-web.zip
+            artifacts/QRtransfer-source.zip
+            artifacts/WEB-INSTALL.txt
+          if-no-files-found: error

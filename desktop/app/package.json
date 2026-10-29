@@ -1,0 +1,10 @@
+{
+  "name": "qrtransfer",
+  "version": "1.0.0",
+  "description": "Offline file and text transfer using animated QR codes",
+  "productName": "QRtransfer",
+  "author": "QRtransfer contributors",
+  "license": "AGPL-3.0-or-later",
+  "main": "main.cjs",
+  "private": true
+}

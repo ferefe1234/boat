@@ -1,0 +1,17 @@
+node_modules/
+dist/
+dist-standalone/
+dist-android/
+.import/
+.tools/
+android/.gradle/
+android/local.properties
+android/**/build/
+android/app/src/main/assets/web/
+*.jks
+*.keystore
+__pycache__/
+artifacts/
+dist-desktop/
+desktop/app/web/
+desktop/release/

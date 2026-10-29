@@ -1,0 +1,61 @@
+/* QRtransfer: light surfaces, restrained green accents, no animated chrome. */
+:root {
+  color-scheme: light;
+  --bg: #ffffff;
+  --panel: #f5f8f5;
+  --panel-strong: #edf6ee;
+  --line: #dce5de;
+  --line-bright: #b4cebb;
+  --text: #192b20;
+  --text-dim: #354e3c;
+  --muted: #526559;
+  --muted-dim: #63756a;
+  --accent: #256a40;
+  --accent-hi: #1b5632;
+  --accent-ink: #fff;
+  --green: #26733f;
+  --red: #ae302d;
+  --accent-rgb: 75, 150, 92;
+  --bg-rgb: 255, 255, 255;
+}
+body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; }
+*, *::before, *::after { animation: none !important; transition: none !important; }
+.home-page, .tool-page, .receiver-page { background: #fff; min-height: 100vh; }
+.site-header { background: #fff; backdrop-filter: none; }
+.brand { text-transform: none; letter-spacing: 0; font-size: 18px; }
+.brand-logo { width: 36px; height: 36px; object-fit: cover; border-radius: 7px; }
+.hero h1 { font-size: clamp(26px, 5vw, 40px); letter-spacing: -.025em; }
+.hero { padding-block: 28px; }
+.transfer-card, .note-feature-card, .settings, .plan-card {
+  background: rgba(220, 242, 224, .5);
+  border: 1px solid #c8dfcd;
+  border-radius: 8px;
+  box-shadow: inset 0 1px 0 #fff;
+  backdrop-filter: none;
+}
+.mode-nav a[aria-current='page'], .mode-switch input:checked + span {
+  background: #deefdf; color: #224d30;
+}
+button, .action, .download { border-radius: 6px; }
+button, select, .mode-nav a { min-height: 44px; }
+.camera-controls { display: flex; align-items: end; flex-wrap: wrap; gap: 12px; margin: 12px 0; }
+.camera-controls label { flex: 1; min-width: 160px; }
+.camera-controls select { width: 100%; display: block; }
+.camera-controls button { padding: 10px 16px; font-size: 14px; }
+.plan-tools { margin: 12px auto; width: min(100% - 32px, 960px); }
+.plan-tools > button { padding: 8px 14px; font-size: 14px; }
+.plans-dialog { width: min(94vw, 560px); max-height: 90vh; overflow: auto; color: var(--text); background: #fff; border: 1px solid var(--line-bright); border-radius: 8px; padding: 22px; }
+.plans-dialog::backdrop { background: #192b2066; }
+.plan-card { margin: 12px 0; padding: 16px; }
+.plan-card h3 { margin: 0 0 8px; }
+.plan-card button { font-size: 15px; padding: 10px 18px; }
+.plan-card p { margin: 8px 0; }
+.plan-status { font-size: 14px; }
+.ad-space { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; border: 1px solid var(--line); background: #f6f8f6; padding: 12px; margin: 12px 0; font-size: 13px; }
+.ad-space span { flex: 1; }
+.ad-space button { font-size: 13px; padding: 6px 12px; }
+.transfer-hud { --text: #fff; --muted: #e1ede3; --bg-rgb: 10, 24, 14; }
+.preview { background: #101710; }
+.site-footer { font-size: 12px; }
+body.qr-full .plan-tools { display: none; }
+@media (max-width: 420px) { .site-header { gap: 8px; padding-inline: 12px; } .brand { font-size: 16px; gap: 6px; } }

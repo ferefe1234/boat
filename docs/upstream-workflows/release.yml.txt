@@ -1,0 +1,48 @@
+name: Release
+
+on:
+  push:
+    tags: ["v*"]
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: Existing tag to build and attach artifacts to
+        required: true
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ inputs.tag || github.ref }}
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+      - run: npm ci
+      - run: npm test
+      - run: npm run build:all
+
+      - name: Package artifacts
+        run: |
+          TAG="${{ inputs.tag || github.ref_name }}"
+          mkdir -p artifacts
+          # The hostable site: unzip onto any static host, or open over a local
+          # server. Registers a service worker, so it runs offline after one visit.
+          (cd dist && zip -qr "../artifacts/decimen-$TAG-site.zip" .)
+          # The two self-contained pages: no server, no network, no install.
+          cp dist-standalone/decimen-sender.html "artifacts/decimen-$TAG-sender.html"
+          cp dist-standalone/decimen-receiver.html "artifacts/decimen-$TAG-receiver.html"
+          (cd artifacts && sha256sum ./* > SHA256SUMS.txt)
+          ls -la artifacts
+
+      - uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ inputs.tag || github.ref_name }}
+          generate_release_notes: true
+          files: artifacts/*

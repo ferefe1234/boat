@@ -1,0 +1,53 @@
+{
+  "appId": "app.qrtransfer.desktop",
+  "productName": "QRtransfer",
+  "directories": {
+    "app": "app",
+    "output": "../artifacts/desktop",
+    "buildResources": "resources"
+  },
+  "files": ["*.cjs", "package.json", "web/**/*"],
+  "asar": true,
+  "npmRebuild": false,
+  "compression": "normal",
+  "publish": null,
+  "mac": {
+    "target": [{ "target": "dmg", "arch": ["universal"] }],
+    "category": "public.app-category.utilities",
+    "icon": "resources/icon.icns",
+    "minimumSystemVersion": "13.0.0",
+    "hardenedRuntime": true,
+    "entitlements": "resources/entitlements.mac.plist",
+    "entitlementsInherit": "resources/entitlements.mac.plist",
+    "extendInfo": {
+      "NSCameraUsageDescription": "QRtransfer uses your camera to receive files from QR codes on another screen."
+    },
+    "artifactName": "QRtransfer-${version}-mac-${arch}.${ext}"
+  },
+  "win": {
+    "target": [{ "target": "nsis", "arch": ["x64"] }],
+    "icon": "resources/icon.ico",
+    "artifactName": "QRtransfer-${version}-windows-${arch}-setup.${ext}"
+  },
+  "nsis": {
+    "oneClick": false,
+    "perMachine": false,
+    "allowElevation": false,
+    "allowToChangeInstallationDirectory": true,
+    "createDesktopShortcut": true,
+    "createStartMenuShortcut": true,
+    "shortcutName": "QRtransfer",
+    "deleteAppDataOnUninstall": false,
+    "runAfterFinish": true
+  },
+  "dmg": {
+    "title": "QRtransfer",
+    "backgroundColor": "#ffffff",
+    "icon": "resources/icon.icns",
+    "window": { "width": 540, "height": 380 },
+    "contents": [
+      { "x": 140, "y": 170 },
+      { "x": 400, "y": 170, "type": "link", "path": "/Applications" }
+    ]
+  }
+}

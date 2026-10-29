@@ -1,0 +1,76 @@
+name: CI
+
+on:
+  push:
+    branches: [main, "release/**"]
+  pull_request:
+
+permissions:
+  contents: read
+
+# Only the newest run per branch matters; cancel the rest.
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+      - run: npm ci
+      - run: npm test
+      - run: npm run build:all
+      # A regression here means the inlined worker or wasm leaked into the
+      # served bundle — see build/use-inline-variants.ts. The bound is an
+      # order-of-magnitude tripwire, not a byte budget: the leak it exists to
+      # catch adds hundreds of KB. Re-margined 20000 → 24000 in 0.5.0, when
+      # wire-v3 verdicts and auto-show legitimately grew the chunk past 20 KB.
+      - name: Served receive chunk stays small
+        run: |
+          shopt -s nullglob
+          chunks=(dist/assets/receive-*.js)
+          # Chunking is Rollup's call, so assert the shape before measuring it:
+          # `stat` on a multi-file glob prints several lines and `test` then
+          # fails with a syntax error instead of a useful message.
+          if [ "${#chunks[@]}" -ne 1 ]; then
+            echo "expected exactly one receive chunk, found ${#chunks[@]}: ${chunks[*]:-none}"
+            exit 1
+          fi
+          bytes=$(stat -c%s "${chunks[0]}")
+          echo "receive chunk: ${chunks[0]} — $bytes bytes"
+          test "$bytes" -lt 24000
+
+      # rootPwaHead() in build/root-pwa-head.ts already asserts this at build
+      # time, but only against the HTML it rewrote. This checks the files on disk
+      # exist where every page now points, which is the part that broke before:
+      # /send/ and /receive/ asked for a manifest and an sw.js that were only
+      # ever at the root, so neither page registered a service worker.
+      - name: Every page's PWA references resolve to real files
+        run: |
+          test -f dist/manifest.webmanifest
+          test -f dist/sw.js
+          for page in index send/index receive/index; do
+            dir=$(dirname "dist/$page.html")
+            for ref in $(grep -oE '(href="[^"]*manifest\.webmanifest"|register\('"'"'[^'"'"']*sw\.js'"'"')' "dist/$page.html" \
+                         | grep -oE '[^"'"'"'(]*(manifest\.webmanifest|sw\.js)'); do
+              target=$(realpath -m "$dir/$ref")
+              if [ ! -f "$target" ]; then
+                echo "dist/$page.html references $ref -> $target, which does not exist"
+                exit 1
+              fi
+              echo "dist/$page.html: $ref -> ${target#"$PWD/"}"
+            done
+          done
+
+      # benchmarks/records.json is the truth; the README section is generated
+      # from it (build/benchmarks.ts). A diff here means someone hand-edited
+      # the section or forgot to run benchmark:readme after promoting.
+      - name: README benchmarks section matches records
+        run: |
+          npm run benchmark:readme
+          git diff --exit-code README.md

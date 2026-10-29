@@ -1,0 +1,36 @@
+plugins { id 'com.android.application' }
+
+android {
+    namespace 'app.qrtransfer.android'
+    compileSdk 36
+    buildToolsVersion '36.0.0'
+    defaultConfig {
+        applicationId 'app.qrtransfer.android'
+        minSdk 24
+        targetSdk 36
+        versionCode 1
+        versionName '1.0.0'
+        // Set to the app's Base64 RSA licensing key from Play Console.
+        buildConfigField 'String', 'PLAY_PUBLIC_KEY', '"' + (project.findProperty('PLAY_PUBLIC_KEY') ?: '') + '"'
+    }
+    buildFeatures { buildConfig true }
+    compileOptions { sourceCompatibility JavaVersion.VERSION_17; targetCompatibility JavaVersion.VERSION_17 }
+    buildTypes {
+        release { minifyEnabled false }
+    }
+}
+dependencies {
+    // Java-only apps don't get the Kotlin plugin's stdlib alignment. Keep the
+    // legacy jdk7/jdk8 artifacts aligned with stdlib to avoid duplicate classes.
+    implementation platform('org.jetbrains.kotlin:kotlin-bom:1.8.22')
+    implementation 'androidx.activity:activity:1.9.3'
+    implementation 'androidx.webkit:webkit:1.12.1'
+    implementation 'com.android.billingclient:billing:8.3.0'
+}
+tasks.register('checkWebAssets') {
+    doLast {
+        if (!file('src/main/assets/web/index.html').exists()) throw new GradleException('Run npm run build:android at the repository root first.')
+        if (!file('src/main/res/mipmap-mdpi/ic_launcher.png').exists()) throw new GradleException('Run python build/prepare-assets.py first.')
+    }
+}
+tasks.named('preBuild').configure { dependsOn 'checkWebAssets' }

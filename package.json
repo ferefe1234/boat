@@ -1,0 +1,46 @@
+{
+  "name": "qrtransfer",
+  "private": true,
+  "version": "0.5.3",
+  "license": "AGPL-3.0-or-later",
+  "engines": {
+    "node": ">=24"
+  },
+  "description": "Offline file and text transfer using fountain-coded animated QR codes \u2014 screen to camera, no network.",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "serve": "npm run build && vite preview",
+    "demo": "vite --mode demo",
+    "diagnostics": "vite --mode diagnostics",
+    "benchmark": "vite --mode benchmark",
+    "build": "tsc && tsc -p tsconfig.node.json && vite build --configLoader runner",
+    "build:web": "npm run build && node --import ./build/register-typescript.mjs build/package-web.ts && node build/check-web.mjs",
+    "preview:web": "node build/preview-web.mjs",
+    "build:desktop": "tsc && tsc -p tsconfig.node.json && vite build --mode desktop --configLoader runner && node build/sync-desktop.mjs && node --import ./build/register-typescript.mjs build/package-source.ts desktop/app/web/qrtransfer-source.zip && node build/check-desktop.mjs",
+    "desktop:setup": "npm install --prefix desktop",
+    "desktop:start": "npm run build:desktop && npm --prefix desktop start",
+    "desktop:mac": "npm run build:desktop && npm --prefix desktop run dist:mac",
+    "desktop:win": "npm run build:desktop && npm --prefix desktop run dist:win",
+    "test:desktop": "node --test tests/desktop-policy.test.cjs",
+    "build:standalone": "node -e \"require('node:fs').rmSync('dist-standalone',{recursive:true,force:true})\" && tsc && vite build --mode standalone-send && vite build --mode standalone-receive",
+    "build:all": "npm run build && npm run build:standalone",
+    "preview": "vite preview",
+    "icons": "python build/prepare-assets.py",
+    "benchmark:promote": "node --import tsx build/benchmarks.ts promote",
+    "benchmark:readme": "node --import tsx build/benchmarks.ts readme",
+    "test": "node --import tsx --test tests/*.test.ts",
+    "build:android": "tsc && vite build --mode android && node build/sync-android.mjs"
+  },
+  "devDependencies": {
+    "@types/node": "^26.1.2",
+    "@types/qrcode": "^1.5.5",
+    "@vitejs/plugin-basic-ssl": "^1.2.0",
+    "qrcode": "^1.5.4",
+    "tsx": "4.20.6",
+    "typescript": "^5.5.0",
+    "vite": "^6.0.0",
+    "vite-plugin-pwa": "^1.3.0",
+    "vite-plugin-singlefile": "^2.3.3"
+  }
+}

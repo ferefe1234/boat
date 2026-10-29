@@ -1,0 +1,83 @@
+name: Desktop installers
+on:
+  workflow_dispatch:
+    inputs:
+      build_windows:
+        description: Build the Windows x64 installer after the Mac DMG
+        type: boolean
+        default: true
+permissions:
+  contents: read
+jobs:
+  mac:
+    runs-on: macos-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+          cache: npm
+      - run: npm ci
+      - run: npm test
+      - run: npm run test:desktop
+      - name: Install desktop build tools
+        shell: bash
+        run: |
+          if [ -f desktop/package-lock.json ]; then
+            npm ci --prefix desktop
+          else
+            npm run desktop:setup
+          fi
+      - name: Build universal Mac DMG
+        run: npm run desktop:mac
+        env:
+          # Optional Developer ID and notarization credentials for distribution.
+          # With no credentials, electron-builder produces an unsigned/ad-hoc test build.
+          CSC_LINK: ${{ secrets.MAC_CSC_LINK }}
+          CSC_KEY_PASSWORD: ${{ secrets.MAC_CSC_KEY_PASSWORD }}
+          APPLE_ID: ${{ secrets.APPLE_ID }}
+          APPLE_APP_SPECIFIC_PASSWORD: ${{ secrets.APPLE_APP_SPECIFIC_PASSWORD }}
+          APPLE_TEAM_ID: ${{ secrets.APPLE_TEAM_ID }}
+      - uses: actions/upload-artifact@v4
+        with:
+          name: QRtransfer-mac-universal
+          path: |
+            artifacts/desktop/*.dmg
+            desktop/app/web/qrtransfer-source.zip
+            desktop/package-lock.json
+          if-no-files-found: error
+  windows:
+    needs: mac
+    if: ${{ !cancelled() && inputs.build_windows }}
+    runs-on: windows-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+          cache: npm
+      - run: npm ci
+      - run: npm run test:desktop
+      - name: Install desktop build tools
+        shell: bash
+        run: |
+          if [ -f desktop/package-lock.json ]; then
+            npm ci --prefix desktop
+          else
+            npm run desktop:setup
+          fi
+      - name: Build Windows x64 installer
+        run: npm run desktop:win
+        env:
+          CSC_LINK: ${{ secrets.WIN_CSC_LINK }}
+          CSC_KEY_PASSWORD: ${{ secrets.WIN_CSC_KEY_PASSWORD }}
+      - uses: actions/upload-artifact@v4
+        with:
+          name: QRtransfer-windows-x64
+          path: |
+            artifacts/desktop/*.exe
+            desktop/app/web/qrtransfer-source.zip
+            desktop/package-lock.json
+          if-no-files-found: error

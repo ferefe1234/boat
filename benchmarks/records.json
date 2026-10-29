@@ -1,0 +1,120 @@
+{
+  "payload": {
+    "file": "public/benchmark.png",
+    "bytes": 1048576,
+    "sha256": "4aa7350bd8e1558dcb24d375b2619789c79b15476e6c14cc7110d515432b5714"
+  },
+  "sustained": {
+    "date": "2026-08-09",
+    "payloadBytes": 1048647,
+    "seconds": 2.45,
+    "codes": 4,
+    "devices": "Odyssey G9 49″ → iPhone 17 Pro Max",
+    "version": "0.4.0",
+    "runFile": "benchmarks/runs/2026-08-09T04-12-41-run.json",
+    "badge": "418.5 KB/s",
+    "senderDevice": {
+      "label": "Odyssey G9 49″",
+      "notes": "Samsung LC49RG90SSNXZA CRG9 49″ curved — sender display, Firefox on Linux"
+    },
+    "receiverDevice": {
+      "label": "iPhone 17 Pro Max",
+      "notes": "MFXH4LL/A — Safari"
+    },
+    "category": "desktop → phone",
+    "sustainedKBs": 418.5,
+    "peakKBs": 601.5
+  },
+  "categories": {
+    "desktop → phone": {
+      "date": "2026-08-09",
+      "payloadBytes": 1048647,
+      "seconds": 2.45,
+      "codes": 4,
+      "devices": "Odyssey G9 49″ → iPhone 17 Pro Max",
+      "version": "0.4.0",
+      "runFile": "benchmarks/runs/2026-08-09T04-12-41-run.json",
+      "badge": "418.5 KB/s",
+      "senderDevice": {
+        "label": "Odyssey G9 49″",
+        "notes": "Samsung LC49RG90SSNXZA CRG9 49″ curved — sender display, Firefox on Linux"
+      },
+      "receiverDevice": {
+        "label": "iPhone 17 Pro Max",
+        "notes": "MFXH4LL/A — Safari"
+      },
+      "category": "desktop → phone",
+      "sustainedKBs": 418.5,
+      "peakKBs": 601.5
+    },
+    "phone → phone": {
+      "category": "phone → phone",
+      "date": "2026-08-09",
+      "payloadBytes": 1048647,
+      "seconds": 5.14,
+      "codes": 2,
+      "devices": "iPhone 17 Pro Max → iPhone 17 Pro Max",
+      "senderDevice": {
+        "label": "iPhone 17 Pro Max",
+        "notes": "MFXH4LL/A — Safari",
+        "type": "phone"
+      },
+      "receiverDevice": {
+        "label": "iPhone 17 Pro Max",
+        "notes": "MFXH4LL/A — Safari",
+        "type": "phone"
+      },
+      "version": "0.4.0",
+      "runFile": "benchmarks/runs/2026-08-09T04-49-39-run.json",
+      "badge": "199.2 KB/s",
+      "sustainedKBs": 199.2,
+      "peakKBs": 340.8
+    }
+  },
+  "history": [
+    {
+      "date": "2026-08-09",
+      "payloadBytes": 1048647,
+      "seconds": 2.45,
+      "codes": 4,
+      "devices": "Odyssey G9 49″ → iPhone 17 Pro Max",
+      "version": "0.4.0",
+      "runFile": "benchmarks/runs/2026-08-09T04-12-41-run.json",
+      "badge": "418.5 KB/s",
+      "senderDevice": {
+        "label": "Odyssey G9 49″",
+        "notes": "Samsung LC49RG90SSNXZA CRG9 49″ curved — sender display, Firefox on Linux"
+      },
+      "receiverDevice": {
+        "label": "iPhone 17 Pro Max",
+        "notes": "MFXH4LL/A — Safari"
+      },
+      "category": "desktop → phone",
+      "sustainedKBs": 418.5,
+      "peakKBs": 601.5
+    },
+    {
+      "category": "phone → phone",
+      "date": "2026-08-09",
+      "payloadBytes": 1048647,
+      "seconds": 5.14,
+      "codes": 2,
+      "devices": "iPhone 17 Pro Max → iPhone 17 Pro Max",
+      "senderDevice": {
+        "label": "iPhone 17 Pro Max",
+        "notes": "MFXH4LL/A — Safari",
+        "type": "phone"
+      },
+      "receiverDevice": {
+        "label": "iPhone 17 Pro Max",
+        "notes": "MFXH4LL/A — Safari",
+        "type": "phone"
+      },
+      "version": "0.4.0",
+      "runFile": "benchmarks/runs/2026-08-09T04-49-39-run.json",
+      "badge": "199.2 KB/s",
+      "sustainedKBs": 199.2,
+      "peakKBs": 340.8
+    }
+  ]
+}

@@ -1,0 +1,98 @@
+name: Decode / transfer bug
+description: The receiver won't decode, or a transfer fails or corrupts
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Screen-to-camera behaviour varies enormously across hardware, so the
+        device and settings fields below are the useful part — a report without
+        them usually can't be acted on.
+
+        Before filing: if nothing decodes at all, try dropping the **sender's**
+        bytes/frame to 1465 and tx fps to 24. That fixes most cases, and knowing
+        whether it fixed yours is itself worth reporting.
+
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: What happened
+      description: What you did, what you expected, and what you got instead.
+    validations:
+      required: true
+
+  - type: dropdown
+    id: symptom
+    attributes:
+      label: Symptom
+      options:
+        - Nothing ever decodes (progress bar never appears)
+        - Decodes, but very slowly / stalls partway
+        - Completes but fails its checksum
+        - Camera won't start at all
+        - Something else
+    validations:
+      required: true
+
+  - type: input
+    id: receiver
+    attributes:
+      label: Receiving device
+      description: Device model, OS version, browser and version.
+      placeholder: iPhone 13 mini, iOS 18.5, Safari
+    validations:
+      required: true
+
+  - type: input
+    id: sender
+    attributes:
+      label: Sending device and display
+      description: Machine, OS, browser, plus the screen's size and refresh rate.
+      placeholder: MacBook Pro 14 (M1), macOS 15.5, Chrome — built-in 120 Hz display
+    validations:
+      required: true
+
+  - type: input
+    id: sender-settings
+    attributes:
+      label: Sender settings
+      description: From the sender's Transfer settings panel.
+      placeholder: tx fps 60 · bytes/frame 2953 · ECC L · display size 900
+    validations:
+      required: true
+
+  - type: input
+    id: receiver-settings
+    attributes:
+      label: Receiver settings and negotiated camera
+      description: >
+        From the Receive settings panel, plus the "camera W×H @ N fps" line it
+        prints underneath — that line is what the camera actually gave you,
+        which is often not what was asked for.
+      placeholder: capture width 1280 · capture fps 60 · 2 workers — camera 1280×960 @ 30 fps (asked 60)
+    validations:
+      required: true
+
+  - type: textarea
+    id: diagnostics
+    attributes:
+      label: Live diagnostics
+      description: Expand "Live diagnostics" on the receiver and paste the numbers.
+      placeholder: capture fps 58 · decode fps 12.4 · goodput 41.2 KB/s · frames new/dup 310/94 · blocks K 179
+
+  - type: dropdown
+    id: build
+    attributes:
+      label: Which build
+      options:
+        - Hosted site
+        - Standalone decimen-receiver.html
+        - Local dev server (npm run dev)
+    validations:
+      required: true
+
+  - type: input
+    id: conditions
+    attributes:
+      label: Distance, lighting, and whether the phone was held or propped
+      placeholder: ~40 cm, normal room light, propped against a mug

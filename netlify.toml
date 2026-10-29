@@ -1,0 +1,9 @@
+[build]
+  command = "npm run build:web"
+  publish = "dist"
+
+[build.environment]
+  NODE_VERSION = "24"
+
+# This is a multi-page app. Keep /send/ and /receive/ as real pages;
+# an SPA fallback would incorrectly turn missing worker/WASM URLs into HTML.

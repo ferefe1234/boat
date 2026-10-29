@@ -1,0 +1,164 @@
+{
+  "role": "receiver",
+  "when": "2026-08-09T04:49:39.673Z",
+  "sessionId": 17429,
+  "ok": true,
+  "seconds": 5.14,
+  "acquisitionSeconds": 0.26,
+  "payloadBytes": 1048647,
+  "payloadSha256": "4aa7350bd8e1558dcb24d375b2619789c79b15476e6c14cc7110d515432b5714",
+  "goodputKBs": 199.2,
+  "fountain": {
+    "k": 358,
+    "blockLen": 2933,
+    "framesNew": 464,
+    "framesDup": 0,
+    "framesRedundant": 9,
+    "overhead": 1.3,
+    "usefulOverhead": 1.27,
+    "seqSpan": 619,
+    "catchRate": 0.75
+  },
+  "codes": 2,
+  "pipeline": {
+    "captureMode": "readback",
+    "captures": 317,
+    "capturesDroppedPoolBusy": 1,
+    "cropsSubmitted": 588,
+    "fullScans": 8,
+    "decodes": 464,
+    "trackedAttempts": 554,
+    "trackedDecodes": 440,
+    "zeroRegionMs": 0,
+    "degradedMs": 500
+  },
+  "workers": 4,
+  "requested": {
+    "width": 1280,
+    "fps": 60,
+    "workers": 4
+  },
+  "camera": {
+    "width": 960,
+    "height": 1280,
+    "fps": 60,
+    "facingMode": "environment"
+  },
+  "cameraCapabilities": {
+    "torch": true,
+    "continuousFocus": false,
+    "maxFrameRate": 60,
+    "maxWidth": 4032
+  },
+  "device": {
+    "cores": 4,
+    "ua": "Mozilla/5.0 (iPhone; CPU iPhone OS 18_7 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/26.5.2 Mobile/15E148 Safari/604.1"
+  },
+  "timelineKey": "seconds, framesNew, solvedBlocks, decodedRegions, trackedRegions, captureFps, decodeFps, fullScansCumulative",
+  "timeline": [
+    [
+      0.2,
+      22,
+      0,
+      2,
+      2,
+      12.5,
+      11,
+      3
+    ],
+    [
+      0.7,
+      80,
+      0,
+      2,
+      2,
+      27,
+      40,
+      3
+    ],
+    [
+      1.2,
+      139,
+      0,
+      2,
+      2,
+      42,
+      69.5,
+      3
+    ],
+    [
+      1.7,
+      198,
+      0,
+      2,
+      2,
+      56.5,
+      99,
+      4
+    ],
+    [
+      2.2,
+      257,
+      25,
+      2,
+      2,
+      59.5,
+      117.5,
+      4
+    ],
+    [
+      2.7,
+      317,
+      85,
+      2,
+      2,
+      60,
+      118.5,
+      4
+    ],
+    [
+      3.3,
+      351,
+      120,
+      2,
+      2,
+      60,
+      106,
+      5
+    ],
+    [
+      3.8,
+      381,
+      152,
+      2,
+      2,
+      60,
+      91,
+      5
+    ],
+    [
+      4.3,
+      411,
+      188,
+      2,
+      2,
+      60,
+      76,
+      5
+    ],
+    [
+      4.8,
+      441,
+      221,
+      1,
+      2,
+      60,
+      61.5,
+      6
+    ]
+  ],
+  "_meta": {
+    "appVersion": "0.4.0",
+    "receivedAt": "2026-08-09T04:49:39.812Z"
+  }
+}

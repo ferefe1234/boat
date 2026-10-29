@@ -1,0 +1,9 @@
+{
+  "repository": "https://github.com/bashalarmistalt/decimen-optical-transfer",
+  "commit": "5301fc2020716b5a97d4edf6e1793c3dedbf6e17",
+  "upstreamVersion": "0.5.3",
+  "license": "AGPL-3.0-or-later",
+  "importMethod": "GitHub connector; source snapshot, not a git clone",
+  "omittedOptionalSamples": ["public/benchmark.png", "public/success-2mb.png"],
+  "logoSource": "https://i.pinimg.com/564x/ec/d6/1f/ecd61f0b2bca53cca308c7a4e42d0d7b.jpg"
+}

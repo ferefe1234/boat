@@ -1,0 +1,114 @@
+{
+  "role": "receiver",
+  "when": "2026-08-09T04:12:41.478Z",
+  "sessionId": 31495,
+  "ok": true,
+  "seconds": 2.45,
+  "acquisitionSeconds": 0.11,
+  "payloadBytes": 1048647,
+  "payloadSha256": "4aa7350bd8e1558dcb24d375b2619789c79b15476e6c14cc7110d515432b5714",
+  "goodputKBs": 418.5,
+  "fountain": {
+    "k": 358,
+    "blockLen": 2933,
+    "framesNew": 428,
+    "framesDup": 29,
+    "framesRedundant": 56,
+    "overhead": 1.2,
+    "usefulOverhead": 1.04,
+    "seqSpan": 616,
+    "catchRate": 0.742
+  },
+  "codes": 4,
+  "pipeline": {
+    "captureMode": "readback",
+    "captures": 152,
+    "capturesDroppedPoolBusy": 3,
+    "cropsSubmitted": 491,
+    "fullScans": 2,
+    "decodes": 457,
+    "trackedAttempts": 488,
+    "trackedDecodes": 420,
+    "zeroRegionMs": 0,
+    "degradedMs": 0
+  },
+  "workers": 4,
+  "requested": {
+    "width": 1280,
+    "fps": 60,
+    "workers": 4
+  },
+  "camera": {
+    "width": 960,
+    "height": 1280,
+    "fps": 60,
+    "facingMode": "environment"
+  },
+  "cameraCapabilities": {
+    "torch": true,
+    "continuousFocus": false,
+    "maxFrameRate": 60,
+    "maxWidth": 4032
+  },
+  "device": {
+    "cores": 4,
+    "ua": "Mozilla/5.0 (iPhone; CPU iPhone OS 18_7 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/26.5.2 Mobile/15E148 Safari/604.1"
+  },
+  "timelineKey": "seconds, framesNew, solvedBlocks, decodedRegions, trackedRegions, captureFps, decodeFps, fullScansCumulative",
+  "timeline": [
+    [
+      0.4,
+      36,
+      0,
+      4,
+      4,
+      14.5,
+      18.5,
+      1
+    ],
+    [
+      0.9,
+      118,
+      48,
+      4,
+      4,
+      29.5,
+      65.5,
+      1
+    ],
+    [
+      1.4,
+      205,
+      136,
+      4,
+      4,
+      44.5,
+      113.5,
+      1
+    ],
+    [
+      1.9,
+      304,
+      239,
+      4,
+      4,
+      59,
+      165.5,
+      2
+    ],
+    [
+      2.4,
+      415,
+      357,
+      4,
+      4,
+      60,
+      203.5,
+      2
+    ]
+  ],
+  "_meta": {
+    "appVersion": "0.4.0",
+    "receivedAt": "2026-08-09T04:12:41.554Z"
+  }
+}
