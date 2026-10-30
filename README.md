@@ -1,5 +1,12 @@
 # QRtransfer
 
+**Version 2.0.0:** saved access-code unlock (`88888888`), centered header navigation,
+cleaner footers, timed ad placeholders, four bundled languages, and sharing links
+to qrtransfer1.netlify.app. The v2 web package and Windows x64 installer are built.
+Android and Mac configuration is updated; their v2 native builds are pending.
+See [v2 delivery and sync instructions](docs/V2-RELEASE.md) and the
+[v2 tech-stack report](docs/TECH-STACK-V2.md). Older status notes below describe v1.
+
 Android, web and desktop adaptation of [Decimen Optical Transfer](https://github.com/bashalarmistalt/decimen-optical-transfer), retaining its QR sender, WASM scanner, fountain coding and integrity checks.
 
 - Android 7.0+ package project; requires an updated WebView (119+).

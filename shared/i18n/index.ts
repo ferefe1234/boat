@@ -28,7 +28,6 @@ import { MAX_SNIPPET_LABEL } from "../snippet";
 
 const LOCALE_KEY = "decimen:locale";
 const BANNER_DISMISSED_KEY = "decimen:locale-banner-dismissed";
-const ISSUES_URL = "https://github.com/bashalarmistalt/decimen-optical-transfer/issues";
 
 // Catalog loading lives in its own module because the standalone build swaps
 // it wholesale (loaders.ts → loaders.inline.ts, static imports) — see the
@@ -174,7 +173,6 @@ export async function initI18n(): Promise<Messages> {
   }
 
   wireLanguageSwitcher(info);
-  if (!info.reviewed) mountUnreviewedNote();
   if (document.body.classList.contains("home-page")) void maybeOfferLocaleBanner(info);
   return msg;
 }
@@ -234,32 +232,11 @@ function wireLanguageSwitcher(current: LocaleInfo): void {
       document.documentElement.dir = target.dir;
       select.setAttribute("aria-label", msg.i18n.languageSelectLabel);
       document.querySelector(".i18n-note")?.remove();
-      if (!target.reviewed) mountUnreviewedNote();
       active = target;
     })();
   });
   holder.append(select);
   footer.append(holder);
-}
-
-/**
- * The per-language "this translation is unreviewed" note — one quiet line in
- * the footer, in the language it is about, linking to the issue tracker.
- * Removing it for a locale is one flag in shared/i18n/registry.ts
- * (reviewed: true); nothing else changes.
- */
-function mountUnreviewedNote(): void {
-  const footer = document.querySelector(".site-footer");
-  if (!footer) return;
-  const note = document.createElement("p");
-  note.className = "i18n-note";
-  const link = document.createElement("a");
-  link.href = ISSUES_URL;
-  link.target = "_blank";
-  link.rel = "noopener noreferrer";
-  link.textContent = msg.i18n.unreviewedLinkText;
-  note.append(`${msg.i18n.unreviewedNote} `, link);
-  footer.prepend(note);
 }
 
 /**

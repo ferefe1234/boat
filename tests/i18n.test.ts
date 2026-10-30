@@ -18,20 +18,12 @@ import { ENGLISH_ERRORS, OpticalError, errorText } from "../shared/optical-error
 import { frameVerdictMessage } from "../shared/protocol.ts";
 
 import { messages as en } from "../shared/i18n/locales/en.ts";
-import { messages as es } from "../shared/i18n/locales/es.ts";
-import { messages as ptBr } from "../shared/i18n/locales/pt-br.ts";
 import { messages as fr } from "../shared/i18n/locales/fr.ts";
-import { messages as de } from "../shared/i18n/locales/de.ts";
-import { messages as it } from "../shared/i18n/locales/it.ts";
-import { messages as ru } from "../shared/i18n/locales/ru.ts";
-import { messages as hi } from "../shared/i18n/locales/hi.ts";
 import { messages as zhHans } from "../shared/i18n/locales/zh-hans.ts";
 import { messages as ja } from "../shared/i18n/locales/ja.ts";
-import { messages as ko } from "../shared/i18n/locales/ko.ts";
-import { messages as ar } from "../shared/i18n/locales/ar.ts";
 
 const CATALOGS: Record<string, Messages> = {
-  en, es, "pt-br": ptBr, fr, de, it, ru, hi, "zh-hans": zhHans, ja, ko, ar,
+  en, fr, "zh-hans": zhHans, ja,
 };
 
 /** Every string leaf of a catalog, as [dot.path, value]. */
@@ -70,8 +62,7 @@ test("the registry, the loader table, and the catalogs agree", () => {
   for (const [code, catalog] of Object.entries(CATALOGS)) {
     assert.equal(catalog.meta, localeByCode(code), `${code}: meta is not its registry row`);
   }
-  const arabic = localeByCode("ar")!;
-  assert.equal(arabic.dir, "rtl");
+  assert.deepEqual([...codes].sort(), ["en", "fr", "ja", "zh-hans"]);
 });
 
 test("every catalog has exactly the English key structure", () => {
@@ -264,15 +255,15 @@ test("every data-i18n key in the HTML pages resolves to a catalog string", () =>
 });
 
 test("browser language lists land on the right locale", () => {
-  assert.equal(matchLocale(["es-MX"])?.code, "es");
-  assert.equal(matchLocale(["pt"])?.code, "pt-br");
-  assert.equal(matchLocale(["pt-PT"])?.code, "pt-br");
+  assert.equal(matchLocale(["es-MX", "pt-PT", "ko", "ar"]), undefined);
+  assert.equal(matchLocale(["fr-CA"])?.code, "fr");
+  assert.equal(matchLocale(["ja-JP"])?.code, "ja");
   assert.equal(matchLocale(["zh"])?.code, "zh-hans");
   assert.equal(matchLocale(["zh-CN"])?.code, "zh-hans");
   assert.equal(matchLocale(["en-GB", "fr"])?.code, "en");
   assert.equal(matchLocale(["da", "sv"]), undefined);
   assert.equal(matchLocale([]), undefined);
-  assert.equal(matchLocale(["AR"])?.code, "ar");
+  assert.equal(matchLocale(["FR"])?.code, "fr");
 });
 
 test("fillTokens fills what it knows and leaves what it doesn't", () => {
@@ -281,7 +272,7 @@ test("fillTokens fills what it knows and leaves what it doesn't", () => {
   assert.equal(fillTokens("100% plain percent", { X: "y" }), "100% plain percent");
 });
 
-test("unreviewed locales carry a note; reviewed ones carry none", () => {
+test("catalogs retain translation review metadata", () => {
   for (const locale of LOCALES) {
     const catalog = CATALOGS[locale.code]!;
     // CJK says in ~18 characters what English needs 90 for — the floor only

@@ -15,14 +15,9 @@ export function wireShareDialog(): () => void {
   const urlInput = document.getElementById("share-url") as HTMLInputElement;
   const copyBtn = document.getElementById("share-copy") as HTMLButtonElement;
   const nativeBtn = document.getElementById("share-native") as HTMLButtonElement;
-  // Uploaded ZIPs don't know their future host. Share the active site's URL.
-  const brand = document.querySelector<HTMLAnchorElement>('a.brand');
-  if (!window.QRtransferAndroid && !window.QRtransferDesktop && /^https?:$/.test(location.protocol) && brand) {
-    urlInput.value = new URL(document.body.classList.contains('home-page') ? './' : 'receive/', brand.href).href;
-  } else if (new URL(urlInput.value).hostname === 'qrtransfer.invalid') {
-    // An installed app has no public URL. The upstream receiver uses the same protocol.
-    urlInput.value = 'https://decimen.app/receive/';
-  }
+  // One public destination for browser, Android and desktop shares.
+  urlInput.value = document.body.classList.contains('home-page')
+    ? 'https://qrtransfer1.netlify.app/' : 'https://qrtransfer1.netlify.app/receive/';
 
   document.getElementById("share-close")!.addEventListener("click", () => dialog.close());
   closeOnBackdropClick(dialog);

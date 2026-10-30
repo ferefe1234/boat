@@ -25,5 +25,5 @@ check(root);
 const sw = readFileSync(join(root, 'sw.js'), 'utf8');
 for (const asset of ['qrtransfer-logo.jpg', 'receive/index.html', 'send/index.html']) assert(sw.includes(asset), `Offline cache missing ${asset}`);
 assert(sw.includes('.wasm'), 'Decoder is missing from offline cache');
-assert(pages >= 36, 'Translated pages missing');
+assert(pages === 12, 'Expected exactly four languages with three pages each');
 console.log(`Verified ${pages} web pages, local asset links, and offline precache.`);

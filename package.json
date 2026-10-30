@@ -1,12 +1,12 @@
 {
   "name": "qrtransfer",
   "private": true,
-  "version": "0.5.3",
+  "version": "2.0.0",
   "license": "AGPL-3.0-or-later",
   "engines": {
     "node": ">=24"
   },
-  "description": "Offline file and text transfer using fountain-coded animated QR codes \u2014 screen to camera, no network.",
+  "description": "Offline file and text transfer using fountain-coded animated QR codes — screen to camera, no network.",
   "type": "module",
   "scripts": {
     "dev": "vite",
@@ -30,7 +30,7 @@
     "benchmark:promote": "node --import tsx build/benchmarks.ts promote",
     "benchmark:readme": "node --import tsx build/benchmarks.ts readme",
     "test": "node --import tsx --test tests/*.test.ts",
-    "build:android": "tsc && vite build --mode android && node build/sync-android.mjs"
+    "build:android": "tsc && vite build --mode android --configLoader runner && node build/sync-android.mjs"
   },
   "devDependencies": {
     "@types/node": "^26.1.2",

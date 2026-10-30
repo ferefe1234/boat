@@ -4,17 +4,9 @@ import { dirname, resolve } from "node:path";
 import { LOCALES, DEFAULT_LOCALE, type LocaleInfo } from "../shared/i18n/registry";
 import type { Messages } from "../shared/i18n/messages";
 import { messages as en } from "../shared/i18n/locales/en";
-import { messages as es } from "../shared/i18n/locales/es";
-import { messages as ptBr } from "../shared/i18n/locales/pt-br";
 import { messages as fr } from "../shared/i18n/locales/fr";
-import { messages as de } from "../shared/i18n/locales/de";
-import { messages as it } from "../shared/i18n/locales/it";
-import { messages as ru } from "../shared/i18n/locales/ru";
-import { messages as hi } from "../shared/i18n/locales/hi";
 import { messages as zhHans } from "../shared/i18n/locales/zh-hans";
 import { messages as ja } from "../shared/i18n/locales/ja";
-import { messages as ko } from "../shared/i18n/locales/ko";
-import { messages as ar } from "../shared/i18n/locales/ar";
 
 /**
  * Hosted-site localization: one fully translated page tree per locale.
@@ -53,7 +45,7 @@ import { messages as ar } from "../shared/i18n/locales/ar";
  */
 
 const CATALOGS: Record<string, Messages> = {
-  en, es, "pt-br": ptBr, fr, de, it, ru, hi, "zh-hans": zhHans, ja, ko, ar,
+  en, fr, "zh-hans": zhHans, ja,
 };
 
 // Hosted page files, keyed by their path in the bundle.

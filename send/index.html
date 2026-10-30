@@ -157,7 +157,7 @@
         <div class="share-url-row">
           <!-- Token-substituted at build time; VITE_SITE_URL overrides it for
                deploys living elsewhere. -->
-          <input id="share-url" readonly value="%SITE_URL%receive/" aria-label="Receiver link" data-i18n-attr="aria-label:send.receiverLinkAriaLabel" />
+          <input id="share-url" readonly value="https://qrtransfer1.netlify.app/receive/" aria-label="Receiver link" data-i18n-attr="aria-label:send.receiverLinkAriaLabel" />
           <button id="share-copy" class="secondary-button" type="button" data-i18n="common.copy">Copy</button>
         </div>
         <div class="note-actions">
@@ -172,12 +172,8 @@
     <footer class="site-footer">
       <span class="footer-id">
         <span>QRtransfer</span>
-        <span>v%APP_VERSION% · build %BUILD_ID% · © 2026 Evan Crawley (Bash Alarmist) · <a href="https://github.com/bashalarmistalt/decimen-optical-transfer/blob/main/LICENSE">AGPL-3.0-or-later</a></span>
+        <span>v%APP_VERSION% · build %BUILD_ID% · <a href="https://github.com/bashalarmistalt/decimen-optical-transfer/blob/main/LICENSE">AGPL-3.0-or-later</a></span>
       </span>
-      <nav class="footer-links" aria-label="Project links" data-i18n-attr="aria-label:chrome.footerLinksAriaLabel">
-        <a href="https://github.com/bashalarmistalt/decimen-optical-transfer">Upstream source</a>
-        <a href="https://github.com/bashalarmistalt/decimen-optical-transfer/releases">Upstream releases</a>
-      </nav>
     </footer>
     <script type="module" src="./main.ts"></script>
   </body>

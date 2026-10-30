@@ -26,9 +26,9 @@ directory. Connect your own Git repository in Netlify to build there. For a
 custom production domain, set `VITE_SITE_URL=https://your-domain.example/` in
 Netlify before building. Otherwise Netlify's deployment URL supplies canonical
 metadata. A local portable build omits unknown canonical URLs. The share dialog
-always uses the URL of the site the visitor actually opened.
+uses https://qrtransfer1.netlify.app/ on home and its /receive/ path on the sender.
 
-The bundle includes 12 languages, local QR processing, offline caching of app
+The v2 bundle includes English, French, Simplified Chinese and Japanese, local QR processing, offline caching of app
 assets and a downloadable corresponding-source archive (`qrtransfer-source.zip`).
 Offline use requires visiting the relevant app once while online so its service
 worker can install. Files move optically between devices, not through Netlify.

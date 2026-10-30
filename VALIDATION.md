@@ -1,5 +1,13 @@
 # Validation status
 
+Version 2.0.0: **148 application tests + 6 desktop policy tests passed**;
+web/Android/desktop asset builds passed; Windows v2 installer generated. Browser
+checks cover code redemption/persistence, ad cadence, four locales, header
+alignment, footer cleanup, sharing and simulated-camera startup.
+See [the v2 report](docs/TECH-STACK-V2.md) for evidence and limits. Android's v2
+native build is blocked by Gradle's native DLL initialization in this session;
+the v2 DMG needs the GitHub Mac runner. Historical results below concern v1.
+
 Completed on this workspace:
 
 - **Android debug build succeeded on 2026-10-30:** the user ran

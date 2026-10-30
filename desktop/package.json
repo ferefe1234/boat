@@ -1,10 +1,12 @@
 {
   "name": "qrtransfer-desktop-build",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "private": true,
   "description": "Packaging tools for the QRtransfer desktop app",
   "license": "AGPL-3.0-or-later",
-  "engines": { "node": ">=24" },
+  "engines": {
+    "node": ">=24"
+  },
   "scripts": {
     "start": "electron app",
     "dist:mac": "electron-builder --config electron-builder.json --mac dmg --universal --publish never",

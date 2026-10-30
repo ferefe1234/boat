@@ -15,15 +15,7 @@ import type { Messages } from "./messages";
 
 export const loaders: Record<string, () => Promise<{ messages: Messages }>> = {
   en: () => import("./locales/en"),
-  es: () => import("./locales/es"),
-  "pt-br": () => import("./locales/pt-br"),
   fr: () => import("./locales/fr"),
-  de: () => import("./locales/de"),
-  it: () => import("./locales/it"),
-  ru: () => import("./locales/ru"),
-  hi: () => import("./locales/hi"),
   "zh-hans": () => import("./locales/zh-hans"),
   ja: () => import("./locales/ja"),
-  ko: () => import("./locales/ko"),
-  ar: () => import("./locales/ar"),
 };
