@@ -1,12 +1,15 @@
-// The share dialog the home page and the sender both carry: a QR of the URL
-// baked into the page's #share-url input, the link itself copyable, and the
-// OS share sheet where one exists. The markup lives in each page's HTML (the
-// URL is a build-time token, so every deploy shares itself); this module only
-// wires behaviour to it.
+// Home and sender share the public web URL, its QR, and the app download link.
 
 import QRCode from "qrcode";
 import { closeOnBackdropClick } from "./dialog";
 import { msg } from "./i18n";
+
+const APP_DOWNLOAD_LABELS: Record<string, string> = {
+  en: 'Download apps on GitHub',
+  fr: 'Télécharger les applications sur GitHub',
+  'zh-hans': '在 GitHub 下载应用',
+  ja: 'GitHub からアプリをダウンロード',
+};
 
 /** Wire the page's share dialog; returns the opener. */
 export function wireShareDialog(): () => void {
@@ -15,6 +18,8 @@ export function wireShareDialog(): () => void {
   const urlInput = document.getElementById("share-url") as HTMLInputElement;
   const copyBtn = document.getElementById("share-copy") as HTMLButtonElement;
   const nativeBtn = document.getElementById("share-native") as HTMLButtonElement;
+  // Injected by the hosted-web build only; native and standalone pages omit it.
+  const appsLink = document.getElementById("share-apps") as HTMLAnchorElement | null;
   // One public destination for browser, Android and desktop shares.
   urlInput.value = document.body.classList.contains('home-page')
     ? 'https://qrtransfer1.netlify.app/' : 'https://qrtransfer1.netlify.app/receive/';
@@ -42,8 +47,7 @@ export function wireShareDialog(): () => void {
       .catch(() => undefined); // cancelling the sheet is not an error
   });
 
-  // Drawn on first open — the URL is baked in at build time, so it never
-  // changes after that.
+  // The public URL stays the same while the dialog is open.
   let qrDrawn = false;
   return () => {
     if (!qrDrawn) {
@@ -51,6 +55,7 @@ export function wireShareDialog(): () => void {
       void QRCode.toCanvas(canvas, urlInput.value, { margin: 2, width: 220 });
     }
     nativeBtn.hidden = typeof navigator.share !== "function";
+    if (appsLink) appsLink.textContent = APP_DOWNLOAD_LABELS[msg.meta.code] ?? APP_DOWNLOAD_LABELS.en!;
     dialog.showModal();
   };
 }

@@ -25,6 +25,7 @@ import { licenseBanner } from "./build/license-banner";
 import { diagnosticsEndpoint } from "./build/diagnostics-endpoint";
 import { i18nPages } from "./build/i18n-pages";
 import { hostingFiles } from "./build/hosting-files";
+import { webAppDownloads } from "./build/web-app-downloads";
 
 const ROOT = fileURLToPath(new URL('.', import.meta.url));
 
@@ -172,6 +173,7 @@ export default defineConfig(({ mode }) => {
     base: "./",
     plugins: [
       htmlTokens(TOKENS),
+      webAppDownloads(),
       basicSsl(),
       VitePWA({
         registerType: "autoUpdate",
