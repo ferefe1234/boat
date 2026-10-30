@@ -30,7 +30,15 @@ jobs:
             npm run desktop:setup
           fi
       - name: Build universal Mac DMG
-        run: npm run desktop:mac
+        shell: bash
+        run: |
+          # An absent GitHub secret becomes an empty string. electron-builder
+          # interprets an empty CSC_LINK as the current directory, not "unsigned".
+          if [ -z "${CSC_LINK:-}" ]; then
+            unset CSC_LINK CSC_KEY_PASSWORD APPLE_ID APPLE_APP_SPECIFIC_PASSWORD APPLE_TEAM_ID
+            export CSC_IDENTITY_AUTO_DISCOVERY=false
+          fi
+          npm run desktop:mac
         env:
           # Optional Developer ID and notarization credentials for distribution.
           # With no credentials, electron-builder produces an unsigned/ad-hoc test build.
@@ -69,7 +77,12 @@ jobs:
             npm run desktop:setup
           fi
       - name: Build Windows x64 installer
-        run: npm run desktop:win
+        shell: bash
+        run: |
+          if [ -z "${CSC_LINK:-}" ]; then
+            unset CSC_LINK CSC_KEY_PASSWORD
+          fi
+          npm run desktop:win
         env:
           CSC_LINK: ${{ secrets.WIN_CSC_LINK }}
           CSC_KEY_PASSWORD: ${{ secrets.WIN_CSC_KEY_PASSWORD }}
